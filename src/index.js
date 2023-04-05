@@ -5,20 +5,80 @@ const yoga = createYoga({
     schema: createSchema({
         typeDefs: /* GraphQL */ `
             type Query {
+                product: Product!
+                products: [Product!]!
+                category: Category!
+                categories: [Category!]!
+            }
+
+            type Product {
                 id: ID!,
                 name: String!
                 description: String!
                 quantity: Int
                 status: String!
             }
+
+            type Category {
+                id: ID!,
+                name: String!
+                description: String!
+            }
         `,
         resolvers: {
             Query: {
-                id: () => 1,
-                name: () => 'lorem ipsum dolor',
-                description: () => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.',
-                quantity: () => 20,
-                status: () => 'available',
+                product: () => ({
+                    id: 1,
+                    name: 'lorem ipsum dolor',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                    quantity: 20,
+                    status: 'available'
+                }),
+                products: () => [
+                    {
+                        id: 1,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        quantity: 20,
+                        status: 'available'
+                    },
+                    {
+                        id: 2,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        quantity: 30,
+                        status: 'available'
+                    },
+                    {
+                        id: 3,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        quantity: 40,
+                        status: 'unavailable'
+                    }
+                ],
+                category: () => ({
+                    id: 1,
+                    name: 'lorem ipsum dolor',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
+                }),
+                categories: () => [
+                    {
+                        id: 1,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
+                    },
+                    {
+                        id: 2,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
+                    },
+                    {
+                        id: 3,
+                        name: 'lorem ipsum dolor',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
+                    }
+                ]
             }
         }
     })
