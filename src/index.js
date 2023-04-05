@@ -15,6 +15,7 @@ const yoga = createYoga({
                 id: ID!,
                 name: String!
                 description: String!
+                price: Int!
                 quantity: Int
                 status: String!
             }
@@ -31,6 +32,7 @@ const yoga = createYoga({
                     id: 1,
                     name: 'lorem ipsum dolor',
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                    price: 19,
                     quantity: 20,
                     status: 'available'
                 }),
@@ -39,6 +41,7 @@ const yoga = createYoga({
                         id: 1,
                         name: 'lorem ipsum dolor',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        price: 19,
                         quantity: 20,
                         status: 'available'
                     },
@@ -46,6 +49,7 @@ const yoga = createYoga({
                         id: 2,
                         name: 'lorem ipsum dolor',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        price: 29,
                         quantity: 30,
                         status: 'available'
                     },
@@ -53,6 +57,7 @@ const yoga = createYoga({
                         id: 3,
                         name: 'lorem ipsum dolor',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
+                        price: 39,
                         quantity: 40,
                         status: 'unavailable'
                     }
