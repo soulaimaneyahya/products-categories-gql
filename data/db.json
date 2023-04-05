@@ -150,5 +150,27 @@
                 "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
             ]
         }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "smartphones",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et."
+        },
+        {
+            "id": 2,
+            "name": "laptops",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et."
+        },
+        {
+            "id": 3,
+            "name": "cosmetics",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et."
+        },
+        {
+            "id": 4,
+            "name": "fashion",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et."
+        }
     ]
 }
