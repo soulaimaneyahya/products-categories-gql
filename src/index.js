@@ -5,12 +5,20 @@ const yoga = createYoga({
     schema: createSchema({
         typeDefs: /* GraphQL */ `
             type Query {
-                greeting: String!
+                id: ID!,
+                name: String!
+                description: String!
+                quantity: Int
+                status: String!
             }
         `,
         resolvers: {
             Query: {
-                greeting: () => 'graphql developer'
+                id: () => 1,
+                name: () => 'lorem ipsum dolor',
+                description: () => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.',
+                quantity: () => 20,
+                status: () => 'available',
             }
         }
     })
