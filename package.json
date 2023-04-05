@@ -25,6 +25,7 @@
     "graphql-yoga": "^3.7.3"
   },
   "devDependencies": {
+    "json-server": "^0.17.3",
     "nodemon": "^2.0.22"
   }
 }
