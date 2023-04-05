@@ -1,5 +1,8 @@
 import { createSchema, createYoga } from 'graphql-yoga'
 import { createServer } from 'node:http'
+import axios from 'axios'
+
+let url = 'http://localhost:3001';
 
 const yoga = createYoga({
     schema: createSchema({
@@ -15,6 +18,7 @@ const yoga = createYoga({
                 id: ID!,
                 name: String!
                 description: String!
+                price: Int!
                 quantity: Int
                 status: String!
             }
@@ -27,58 +31,10 @@ const yoga = createYoga({
         `,
         resolvers: {
             Query: {
-                product: () => ({
-                    id: 1,
-                    name: 'lorem ipsum dolor',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
-                    quantity: 20,
-                    status: 'available'
-                }),
-                products: () => [
-                    {
-                        id: 1,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
-                        quantity: 20,
-                        status: 'available'
-                    },
-                    {
-                        id: 2,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
-                        quantity: 30,
-                        status: 'available'
-                    },
-                    {
-                        id: 3,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..',
-                        quantity: 40,
-                        status: 'unavailable'
-                    }
-                ],
-                category: () => ({
-                    id: 1,
-                    name: 'lorem ipsum dolor',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
-                }),
-                categories: () => [
-                    {
-                        id: 1,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
-                    },
-                    {
-                        id: 2,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
-                    },
-                    {
-                        id: 3,
-                        name: 'lorem ipsum dolor',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..'
-                    }
-                ]
+                product: async () => (await axios.get(`${url}/products/1`)).data,
+                products: async () => (await axios.get(`${url}/products`)).data,
+                category: async () => (await axios.get(`${url}/categories/1`)).data,
+                categories: async () => (await axios.get(`${url}/categories`)).data
             }
         }
     })
