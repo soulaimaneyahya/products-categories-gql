@@ -8,10 +8,10 @@ const yoga = createYoga({
     schema: createSchema({
         typeDefs: /* GraphQL */ `
             type Query {
-                product: Product!
-                products: [Product!]!
-                category: Category!
-                categories: [Category!]!
+                product(id: ID!): Product!
+                products(id: ID, status: String, sort: String, order: String, page: Int, limit: Int): [Product!]!
+                category(id: ID!): Category!
+                categories(id: ID, name: String, sort: String, order: String, page: Int, limit: Int): [Category!]!
             }
 
             type Product {
@@ -31,10 +31,33 @@ const yoga = createYoga({
         `,
         resolvers: {
             Query: {
-                product: async () => (await axios.get(`${url}/products/1`)).data,
-                products: async () => (await axios.get(`${url}/products`)).data,
-                category: async () => (await axios.get(`${url}/categories/1`)).data,
-                categories: async () => (await axios.get(`${url}/categories`)).data
+                product: async (parent, args, context, info) => (await axios.get(`${url}/products/${args.id}`)).data,
+                products: async (parent, args, context, info) => {
+
+                    let id = args.id != null ? `id=${args.id}` : '';
+                    let status = args.status != null ? `status=${args.status}` : '';
+
+                    let sort = args.sort != null ? `_sort=${args.sort}` : '';
+                    let order = args.order != null ? `_order=${args.order}` : '';
+                    let page = args.page != null ? `_page=${args.page}` : '';
+                    let limit = args.limit != null ? `_limit=${args.limit}` : '';
+
+                    return (await axios.get(`${url}/products?${id}&${status}&${sort}&${order}&${page}&${limit}`)).data
+                },
+
+                category: async (parent, args, context, info) => (await axios.get(`${url}/categories/${args.id}`)).data,
+                categories: async (parent, args, context, info) => {
+
+                    let id = args.id != null ? `id=${args.id}` : '';
+                    let name = args.name != null ? `name=${args.name}` : '';
+
+                    let sort = args.sort != null ? `_sort=${args.sort}` : '';
+                    let order = args.order != null ? `_order=${args.order}` : '';
+                    let page = args.page != null ? `_page=${args.page}` : '';
+                    let limit = args.limit != null ? `_limit=${args.limit}` : '';
+
+                    return (await axios.get(`${url}/categories?${id}&${name}&${sort}&${order}&${page}&${limit}`)).data
+                }
             }
         }
     })
