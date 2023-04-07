@@ -21,6 +21,7 @@ const yoga = createYoga({
                 price: Int!
                 quantity: Int
                 status: String!
+                category: Category!
             }
 
             type Category {
@@ -58,6 +59,10 @@ const yoga = createYoga({
 
                     return (await axios.get(`${url}/categories?${id}&${name}&${sort}&${order}&${page}&${limit}`)).data
                 }
+            },
+            Product: {
+                // whenever i go to products, fire category fct
+                category: async (parent, args, context, info) => (await axios.get(`${url}/categories/${parent.category}`)).data
             }
         }
     })
