@@ -91,6 +91,9 @@ const yoga = createYoga({
             },
             Category: {
                 products: async (parent, args, context, info) => (await axios.get(`${url}/products?category=${parent.id}`)).data
+            },
+            User: {
+                products: async (parent, args, context, info) => (await axios.get(`${url}/products?user=${parent.id}`)).data
             }
         }
     })
