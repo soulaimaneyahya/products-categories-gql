@@ -1,4 +1,24 @@
 {
+    "users": [
+        {
+            "id": 1,
+            "name": "Lisa",
+            "username": "Lisal1",
+            "email": "Lisa@gmail.com"
+        },
+        {
+            "id": 2,
+            "name": "Ron",
+            "username": "Ronl1",
+            "email": "Ron@gmail.com"
+        },
+        {
+            "id": 3,
+            "name": "Romi",
+            "username": "Romil1",
+            "email": "Romi@gmail.com"
+        }
+    ],
     "products": [
         {
             "id": 1,
@@ -7,6 +27,8 @@
             "price": 549,
             "quantity": 94,
             "status": "available",
+            "category": 1,
+            "user": 1,
             "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/1/1.jpg",
@@ -23,6 +45,8 @@
             "price": 899,
             "quantity": 34,
             "status": "available",
+            "category": 2,
+            "user": 3,
             "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/2/1.jpg",
@@ -38,6 +62,8 @@
             "price": 1249,
             "quantity": 36,
             "status": "available",
+            "category": 2,
+            "user": 1,
             "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/3/1.jpg"
@@ -50,6 +76,8 @@
             "price": 280,
             "quantity": 123,
             "status": "available",
+            "category": 2,
+            "user": 1,
             "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/4/1.jpg",
@@ -66,6 +94,8 @@
             "price": 499,
             "quantity": 32,
             "status": "available",
+            "category": 1,
+            "user": 2,
             "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/5/1.jpg",
@@ -80,6 +110,8 @@
             "price": 1749,
             "quantity": 83,
             "status": "unavailable",
+            "category": 3,
+            "user": 2,
             "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
             "images": [
                 "https://i.dummyjson.com/data/products/6/1.png",
@@ -95,6 +127,8 @@
             "price": 1499,
             "quantity": 50,
             "status": "unavailable",
+            "category": 2,
+            "user": 2,
             "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/7/1.jpg",
@@ -110,6 +144,8 @@
             "price": 1499,
             "quantity": 68,
             "status": "unavailable",
+            "category": 4,
+            "user": 1,
             "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/8/1.jpg",
@@ -126,6 +162,8 @@
             "price": 1099,
             "quantity": 96,
             "status": "unavailable",
+            "category": 4,
+            "user": 3,
             "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
             "images": [
                 "https://i.dummyjson.com/data/products/9/1.jpg",
@@ -142,6 +180,8 @@
             "price": 1099,
             "quantity": 89,
             "status": "available",
+            "category": 3,
+            "user": 3,
             "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
             "images": [
                 "https://i.dummyjson.com/data/products/10/1.jpg",
