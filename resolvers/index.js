@@ -77,12 +77,16 @@ export const Mutation = {
     },
 
     createProduct: async (parent, args, context, info) => {
+        // we can get userId from token
+        
         let data = {
             name: args.name,
             description: args.description,
             price: args.price,
             quantity: args.quantity,
-            status: args.status
+            status: args.status,
+            category: 1,
+            user: 1
         }
 
         return (await axios.post(`${url}/products`, data)).data

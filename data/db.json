@@ -129,17 +129,21 @@
     {
       "name": "lorem ipsum",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.",
-      "price": 199,
+      "price": 199.5,
       "quantity": 100,
       "status": "available",
+      "category": 1,
+      "user": 1,
       "id": 11
     },
     {
       "name": "lorem ipsum",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.",
-      "price": 199.5,
+      "price": 199,
       "quantity": 100,
       "status": "available",
+      "category": 1,
+      "user": 1,
       "id": 12
     }
   ],
