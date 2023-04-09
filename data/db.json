@@ -7,10 +7,10 @@
       "email": "Lisa@gmail.com"
     },
     {
-      "id": 3,
-      "name": "Romi",
+      "name": "Rome",
       "username": "Romil1",
-      "email": "Romi@gmail.com"
+      "email": "Romi@gmail.com",
+      "id": 3
     },
     {
       "name": "soulaimaneyahya",
@@ -21,14 +21,13 @@
   ],
   "products": [
     {
-      "id": 1,
-      "name": "iPhone 9",
+      "name": "Iphone 14",
       "description": "An apple mobile which is nothing like apple",
       "price": 549,
       "quantity": 94,
       "status": "available",
       "category": 1,
-      "user": 1
+      "id": 1
     },
     {
       "id": 3,

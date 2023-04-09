@@ -68,6 +68,17 @@ export const Mutation = {
 
         return (await axios.post(`${url}/users`, data)).data
     },
+    updateUser: async (parent, args, context, info) => {
+        let user = (await axios.get(`${url}/users/${args.id}`)).data;
+
+        let data = {
+            name: args.name != undefined ? args.name : user.name,
+            username: args.username != undefined ? args.username : user.username,
+            email: args.email != undefined ? args.email : user.email
+        }
+
+        return (await axios.put(`${url}/users/${user.id}`, data)).data
+    },
     deleteUser: async (parent, args, context, info) => {
         const res = (await axios.delete(`${url}/users/${args.id}`)).data
         if (Object.keys(res).length === 0) { // no content
@@ -90,6 +101,21 @@ export const Mutation = {
         }
 
         return (await axios.post(`${url}/products`, data)).data
+    },
+    updateProduct: async (parent, args, context, info) => {
+        let product = (await axios.get(`${url}/products/${args.id}`)).data;
+
+        let data = {
+            name: args.name != undefined ? args.name : product.name,
+            description: args.description != undefined ? args.description : product.description,
+            price: args.price != undefined ? args.price : product.price,
+            quantity: args.quantity != undefined ? args.quantity : product.quantity,
+            status: args.status != undefined ? args.status : product.status,
+            category: product.category,
+            product: product.product
+        }
+
+        return (await axios.put(`${url}/products/${product.id}`, data)).data
     },
     deleteProduct: async (parent, args, context, info) => {
         const res = (await axios.delete(`${url}/products/${args.id}`)).data

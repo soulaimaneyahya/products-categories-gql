@@ -23,6 +23,9 @@ const yoga = createYoga({
                 createUser(name: String!, username: String!, email: String!): User!
                 createProduct(name: String!, description: String!, price: Float!, quantity: Int! , status: String!): Product!
 
+                updateUser(id: ID!, name: String, username: String, email: String): User!
+                updateProduct(id: ID!, name: String, description: String, price: Float, quantity: Int, status: String): Product!
+
                 deleteUser(id: ID!): Boolean!
                 deleteProduct(id: ID!): Boolean!
             }
