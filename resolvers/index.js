@@ -59,7 +59,71 @@ export const Query = {
 }
 
 export const Mutation = {
-    //
+    createUser: async (parent, args, context, info) => {
+        let data = {
+            name: args.name,
+            username: args.username,
+            email: args.email
+        }
+
+        return (await axios.post(`${url}/users`, data)).data
+    },
+    updateUser: async (parent, args, context, info) => {
+        let user = (await axios.get(`${url}/users/${args.id}`)).data;
+
+        let data = {
+            name: args.name != undefined ? args.name : user.name,
+            username: args.username != undefined ? args.username : user.username,
+            email: args.email != undefined ? args.email : user.email
+        }
+
+        return (await axios.put(`${url}/users/${user.id}`, data)).data
+    },
+    deleteUser: async (parent, args, context, info) => {
+        const res = (await axios.delete(`${url}/users/${args.id}`)).data
+        if (Object.keys(res).length === 0) { // no content
+            return true;
+        }
+        return false;
+    },
+
+    createProduct: async (parent, args, context, info) => {
+        // we can get userId from token
+        // find all images and delete them
+        let data = {
+            name: args.name,
+            description: args.description,
+            price: args.price,
+            quantity: args.quantity,
+            status: args.status,
+            category: 1,
+            user: 1
+        }
+
+        return (await axios.post(`${url}/products`, data)).data
+    },
+    updateProduct: async (parent, args, context, info) => {
+        let product = (await axios.get(`${url}/products/${args.id}`)).data;
+
+        let data = {
+            name: args.name != undefined ? args.name : product.name,
+            description: args.description != undefined ? args.description : product.description,
+            price: args.price != undefined ? args.price : product.price,
+            quantity: args.quantity != undefined ? args.quantity : product.quantity,
+            status: args.status != undefined ? args.status : product.status,
+            category: product.category,
+            product: product.product
+        }
+
+        return (await axios.put(`${url}/products/${product.id}`, data)).data
+    },
+    deleteProduct: async (parent, args, context, info) => {
+        const res = (await axios.delete(`${url}/products/${args.id}`)).data
+        if (Object.keys(res).length === 0) {
+            return true;
+        }
+        return false;
+    }
 }
 
 export const User = {
@@ -67,9 +131,15 @@ export const User = {
 }
 
 export const Product = {
+    user: async (parent, args, context, info) => {
+        try {
+            return (await axios.get(`${url}/users/${parent.user}`)).data
+        } catch (e) {
+            return null
+        }
+    },
     // whenever i go to products, fire category fct
     category: async (parent, args, context, info) => (await axios.get(`${url}/categories/${parent.category}`)).data,
-    user: async (parent, args, context, info) => (await axios.get(`${url}/users/${parent.user}`)).data,
     images: async (parent, args, context, info) => (await axios.get(`${url}/images?product=${parent.id}`)).data
 }
 
@@ -78,5 +148,11 @@ export const Category = {
 }
 
 export const Image = {
-    product: async (parent, args, context, info) => (await axios.get(`${url}/products/${parent.product}`)).data
+    product: async (parent, args, context, info) => {
+        try {
+            return (await axios.get(`${url}/products/${parent.product}`)).data
+        } catch (e) {
+            return null
+        }
+    }
 }

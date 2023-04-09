@@ -1,4 +1,4 @@
-import { Query, User, Product, Category, Image } from '../resolvers/index';
+import { Query, Mutation, User, Product, Category, Image } from '../resolvers/index';
 import { createSchema, createYoga } from 'graphql-yoga'
 import { createServer } from 'node:http'
 
@@ -19,6 +19,17 @@ const yoga = createYoga({
                 images(id: ID, sort: String, order: String, page: Int, limit: Int): [Image!]!
             }
 
+            type Mutation {
+                createUser(name: String!, username: String!, email: String!): User!
+                createProduct(name: String!, description: String!, price: Float!, quantity: Int! , status: String!): Product!
+
+                updateUser(id: ID!, name: String, username: String, email: String): User!
+                updateProduct(id: ID!, name: String, description: String, price: Float, quantity: Int, status: String): Product!
+
+                deleteUser(id: ID!): Boolean!
+                deleteProduct(id: ID!): Boolean!
+            }
+
             type User {
                 id: ID!
                 name: String!
@@ -31,10 +42,10 @@ const yoga = createYoga({
                 id: ID!,
                 name: String!
                 description: String!
-                price: Int!
+                price: Float!
                 quantity: Int
                 status: String!
-                user: User!
+                user: User
                 category: Category
                 images: [Image!]
             }
@@ -49,12 +60,12 @@ const yoga = createYoga({
             type Image {
                 id: ID!
                 path: String!
-                user: User!
-                product: Product!
+                product: Product
             }
         `,
         resolvers: {
             Query,
+            Mutation,
             Product,
             Category,
             User,
