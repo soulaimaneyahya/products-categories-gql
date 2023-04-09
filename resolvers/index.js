@@ -78,7 +78,7 @@ export const Mutation = {
 
     createProduct: async (parent, args, context, info) => {
         // we can get userId from token
-        
+        // find all images and delete them
         let data = {
             name: args.name,
             description: args.description,
@@ -105,9 +105,15 @@ export const User = {
 }
 
 export const Product = {
+    user: async (parent, args, context, info) => {
+        try {
+            return (await axios.get(`${url}/users/${parent.user}`)).data
+        } catch (e) {
+            return null
+        }
+    },
     // whenever i go to products, fire category fct
     category: async (parent, args, context, info) => (await axios.get(`${url}/categories/${parent.category}`)).data,
-    user: async (parent, args, context, info) => (await axios.get(`${url}/users/${parent.user}`)).data,
     images: async (parent, args, context, info) => (await axios.get(`${url}/images?product=${parent.id}`)).data
 }
 
@@ -116,5 +122,11 @@ export const Category = {
 }
 
 export const Image = {
-    product: async (parent, args, context, info) => (await axios.get(`${url}/products/${parent.product}`)).data
+    product: async (parent, args, context, info) => {
+        try {
+            return (await axios.get(`${url}/products/${parent.product}`)).data
+        } catch (e) {
+            return null
+        }
+    }
 }

@@ -42,7 +42,7 @@ const yoga = createYoga({
                 price: Float!
                 quantity: Int
                 status: String!
-                user: User!
+                user: User
                 category: Category
                 images: [Image!]
             }
@@ -57,8 +57,7 @@ const yoga = createYoga({
             type Image {
                 id: ID!
                 path: String!
-                user: User!
-                product: Product!
+                product: Product
             }
         `,
         resolvers: {
