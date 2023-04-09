@@ -59,7 +59,41 @@ export const Query = {
 }
 
 export const Mutation = {
-    //
+    createUser: async (parent, args, context, info) => {
+        let data = {
+            name: args.name,
+            username: args.username,
+            email: args.email
+        }
+
+        return (await axios.post(`${url}/users`, data)).data
+    },
+    deleteUser: async (parent, args, context, info) => {
+        const res = (await axios.delete(`${url}/users/${args.id}`)).data
+        if (Object.keys(res).length === 0) { // no content
+            return true;
+        }
+        return false;
+    },
+
+    createProduct: async (parent, args, context, info) => {
+        let data = {
+            name: args.name,
+            description: args.description,
+            price: args.price,
+            quantity: args.quantity,
+            status: args.status
+        }
+
+        return (await axios.post(`${url}/products`, data)).data
+    },
+    deleteProduct: async (parent, args, context, info) => {
+        const res = (await axios.delete(`${url}/products/${args.id}`)).data
+        if (Object.keys(res).length === 0) {
+            return true;
+        }
+        return false;
+    }
 }
 
 export const User = {
