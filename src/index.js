@@ -41,7 +41,7 @@ const yoga = createYoga({
                 description: String!,
                 price: Float!,
                 quantity: Int!,
-                status: String!
+                status: ProductStatus!
             }
 
             input UpdateUserType {
@@ -55,7 +55,7 @@ const yoga = createYoga({
                 description: String,
                 price: Float,
                 quantity: Int,
-                status: String
+                status: ProductStatus
             }
 
             type User {
@@ -72,7 +72,7 @@ const yoga = createYoga({
                 description: String!
                 price: Float!
                 quantity: Int
-                status: String!
+                status: ProductStatus!
                 user: User
                 category: Category
                 images: [Image!]
@@ -89,6 +89,14 @@ const yoga = createYoga({
                 id: ID!
                 path: String!
                 product: Product
+            }
+
+            enum ProductStatus {
+                available
+                unavailable
+                archived
+                draft
+                trashed
             }
         `,
         resolvers: {
