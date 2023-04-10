@@ -20,28 +20,42 @@ const yoga = createYoga({
             }
 
             type Mutation {
-                createUser(data: UserType): User!
-                createProduct(data: ProductType): Product!
+                createUser(data: CreateUserType): User!
+                createProduct(data: CreateProductType): Product!
 
-                updateUser(id: ID!, name: String, username: String, email: String): User!
-                updateProduct(id: ID!, name: String, description: String, price: Float, quantity: Int, status: String): Product!
+                updateUser(id: ID!, data: UpdateUserType): User!
+                updateProduct(id: ID!, data: UpdateProductType): Product!
 
                 deleteUser(id: ID!): Boolean!
                 deleteProduct(id: ID!): Boolean!
             }
 
-            input UserType {
+            input CreateUserType {
                 name: String!,
                 username: String!,
                 email: String!
             }
 
-            input ProductType {
+            input CreateProductType {
                 name: String!,
                 description: String!,
                 price: Float!,
                 quantity: Int!,
                 status: String!
+            }
+
+            input UpdateUserType {
+                name: String,
+                username: String,
+                email: String
+            }
+
+            input UpdateProductType {
+                name: String,
+                description: String,
+                price: Float,
+                quantity: Int,
+                status: String
             }
 
             type User {
