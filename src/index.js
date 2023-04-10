@@ -20,14 +20,28 @@ const yoga = createYoga({
             }
 
             type Mutation {
-                createUser(name: String!, username: String!, email: String!): User!
-                createProduct(name: String!, description: String!, price: Float!, quantity: Int! , status: String!): Product!
+                createUser(data: UserType): User!
+                createProduct(data: ProductType): Product!
 
                 updateUser(id: ID!, name: String, username: String, email: String): User!
                 updateProduct(id: ID!, name: String, description: String, price: Float, quantity: Int, status: String): Product!
 
                 deleteUser(id: ID!): Boolean!
                 deleteProduct(id: ID!): Boolean!
+            }
+
+            input UserType {
+                name: String!,
+                username: String!,
+                email: String!
+            }
+
+            input ProductType {
+                name: String!,
+                description: String!,
+                price: Float!,
+                quantity: Int!,
+                status: String!
             }
 
             type User {
