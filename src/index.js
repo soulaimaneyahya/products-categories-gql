@@ -5,8 +5,6 @@ import { createServer } from 'node:http'
 const yoga = createYoga({
     schema: createSchema({
         typeDefs: /* GraphQL */ `
-            scalar DateTime
-
             type Query {
                 user(id: ID!): User!
                 users(id: ID, username: String, sort: String, order: String, page: Int, limit: Int): [User!]!
@@ -38,9 +36,6 @@ const yoga = createYoga({
                 username: String!
                 email: String!
                 products: [Product!]
-                created_at: DateTime
-                updated_at: DateTime
-                deleted_at: DateTime
             }
 
             type Product {
@@ -53,9 +48,6 @@ const yoga = createYoga({
                 user: User
                 category: Category
                 images: [Image!]
-                created_at: DateTime
-                updated_at: DateTime
-                deleted_at: DateTime
             }
 
             type Category {
@@ -63,18 +55,12 @@ const yoga = createYoga({
                 name: String!
                 description: String!
                 products: [Product!]
-                created_at: DateTime
-                updated_at: DateTime
-                deleted_at: DateTime
             }
 
             type Image {
                 id: ID!
                 path: String!
                 product: Product
-                created_at: DateTime
-                updated_at: DateTime
-                deleted_at: DateTime
             }
         `,
         resolvers: {
