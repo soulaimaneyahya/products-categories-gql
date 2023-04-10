@@ -2,13 +2,7 @@ import axios from 'axios'
 const url = `http://localhost:3001`;
 
 export const Query = {
-    user: async (parent, args, context, info) => {
-        let user = (await axios.get(`${url}/users/${args.id}`)).data
-
-        if (user.deleted_at == null) {
-            return user
-        }
-    },
+    user: async (parent, args, context, info) => (await axios.get(`${url}/users/${args.id}`)).data,
     users: async (parent, args, context, info) => {
 
         let id = args.id != null ? `id=${args.id}` : '';
@@ -19,16 +13,10 @@ export const Query = {
         let page = args.page != null ? `_page=${args.page}` : '';
         let limit = args.limit != null ? `_limit=${args.limit}` : '';
 
-        return (await axios.get(`${url}/users?${id}&${username}&${sort}&${order}&${page}&${limit}`)).data.filter(user => user.deleted_at == null)
+        return (await axios.get(`${url}/users?${id}&${username}&${sort}&${order}&${page}&${limit}`)).data
     },
 
-    product: async (parent, args, context, info) => {
-        let product = (await axios.get(`${url}/products/${args.id}`)).data
-
-        if (product.deleted_at == null) {
-            return product
-        }
-    },
+    product: async (parent, args, context, info) => (await axios.get(`${url}/products/${args.id}`)).data,
     products: async (parent, args, context, info) => {
 
         let id = args.id != null ? `id=${args.id}` : '';
@@ -39,16 +27,10 @@ export const Query = {
         let page = args.page != null ? `_page=${args.page}` : '';
         let limit = args.limit != null ? `_limit=${args.limit}` : '';
 
-        return (await axios.get(`${url}/products?${id}&${status}&${sort}&${order}&${page}&${limit}`)).data.filter(product => product.deleted_at == null)
+        return (await axios.get(`${url}/products?${id}&${status}&${sort}&${order}&${page}&${limit}`)).data
     },
 
-    category: async (parent, args, context, info) => {
-        let category = (await axios.get(`${url}/categories/${args.id}`)).data
-
-        if (category.deleted_at == null) {
-            return category
-        }
-    },
+    category: async (parent, args, context, info) => (await axios.get(`${url}/categories/${args.id}`)).data,
     categories: async (parent, args, context, info) => {
 
         let id = args.id != null ? `id=${args.id}` : '';
@@ -59,16 +41,10 @@ export const Query = {
         let page = args.page != null ? `_page=${args.page}` : '';
         let limit = args.limit != null ? `_limit=${args.limit}` : '';
 
-        return (await axios.get(`${url}/categories?${id}&${name}&${sort}&${order}&${page}&${limit}`)).data.filter(category => category.deleted_at == null)
+        return (await axios.get(`${url}/categories?${id}&${name}&${sort}&${order}&${page}&${limit}`)).data
     },
 
-    image: async (parent, args, context, info) => {
-        let image = (await axios.get(`${url}/images/${args.id}`)).data
-
-        if (image.deleted_at == null) {
-            return image
-        }
-    },
+    image: async (parent, args, context, info) => (await axios.get(`${url}/images/${args.id}`)).data,
     images: async (parent, args, context, info) => {
         
         let id = args.id != null ? `id=${args.id}` : '';
@@ -78,7 +54,7 @@ export const Query = {
         let page = args.page != null ? `_page=${args.page}` : '';
         let limit = args.limit != null ? `_limit=${args.limit}` : '';
 
-        return (await axios.get(`${url}/images?${id}&${sort}&${order}&${page}&${limit}`)).data.filter(image => image.deleted_at == null)
+        return (await axios.get(`${url}/images?${id}&${sort}&${order}&${page}&${limit}`)).data
     }
 }
 
@@ -87,10 +63,7 @@ export const Mutation = {
         let data = {
             name: args.name,
             username: args.username,
-            email: args.email,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            deleted_at: null
+            email: args.email
         }
 
         return (await axios.post(`${url}/users`, data)).data
@@ -101,21 +74,16 @@ export const Mutation = {
         let data = {
             name: args.name != undefined ? args.name : user.name,
             username: args.username != undefined ? args.username : user.username,
-            email: args.email != undefined ? args.email : user.email,
-            updated_at: new Date().toISOString()
+            email: args.email != undefined ? args.email : user.email
         }
 
         return (await axios.put(`${url}/users/${user.id}`, data)).data
     },
     deleteUser: async (parent, args, context, info) => {
-        let user = (await axios.get(`${url}/users/${args.id}`)).data;
-        user.deleted_at = new Date().toISOString()
-        let res = (await axios.put(`${url}/users/${args.id}`, user)).data
-
-        if (res.deleted_at != null) { // no content
+        const res = (await axios.delete(`${url}/users/${args.id}`)).data
+        if (Object.keys(res).length === 0) { // no content
             return true;
         }
-
         return false;
     },
 
@@ -129,10 +97,7 @@ export const Mutation = {
             quantity: args.quantity,
             status: args.status,
             category: 1,
-            user: 1,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            deleted_at: null
+            user: 1
         }
 
         return (await axios.post(`${url}/products`, data)).data
@@ -147,22 +112,17 @@ export const Mutation = {
             quantity: args.quantity != undefined ? args.quantity : product.quantity,
             status: args.status != undefined ? args.status : product.status,
             category: product.category,
-            product: product.product,
-            updated_at: new Date().toISOString()
+            product: product.product
         }
 
         return (await axios.put(`${url}/products/${product.id}`, data)).data
     },
     deleteProduct: async (parent, args, context, info) => {
-        let product = (await axios.get(`${url}/products/${args.id}`)).data
-        product.deleted_at = new Date().toISOString()
-        let res = (await axios.put(`${url}/products/${args.id}`, product)).data
-
-        if (res.deleted_at != null) { // no content
-            return true
+        const res = (await axios.delete(`${url}/products/${args.id}`)).data
+        if (Object.keys(res).length === 0) {
+            return true;
         }
-
-        return false
+        return false;
     }
 }
 
