@@ -20,14 +20,42 @@ const yoga = createYoga({
             }
 
             type Mutation {
-                createUser(name: String!, username: String!, email: String!): User!
-                createProduct(name: String!, description: String!, price: Float!, quantity: Int! , status: String!): Product!
+                createUser(data: CreateUserType): User!
+                createProduct(data: CreateProductType): Product!
 
-                updateUser(id: ID!, name: String, username: String, email: String): User!
-                updateProduct(id: ID!, name: String, description: String, price: Float, quantity: Int, status: String): Product!
+                updateUser(id: ID!, data: UpdateUserType): User!
+                updateProduct(id: ID!, data: UpdateProductType): Product!
 
                 deleteUser(id: ID!): Boolean!
                 deleteProduct(id: ID!): Boolean!
+            }
+
+            input CreateUserType {
+                name: String!,
+                username: String!,
+                email: String!
+            }
+
+            input CreateProductType {
+                name: String!,
+                description: String!,
+                price: Float!,
+                quantity: Int!,
+                status: ProductStatus!
+            }
+
+            input UpdateUserType {
+                name: String,
+                username: String,
+                email: String
+            }
+
+            input UpdateProductType {
+                name: String,
+                description: String,
+                price: Float,
+                quantity: Int,
+                status: ProductStatus
             }
 
             type User {
@@ -44,7 +72,7 @@ const yoga = createYoga({
                 description: String!
                 price: Float!
                 quantity: Int
-                status: String!
+                status: ProductStatus!
                 user: User
                 category: Category
                 images: [Image!]
@@ -61,6 +89,14 @@ const yoga = createYoga({
                 id: ID!
                 path: String!
                 product: Product
+            }
+
+            enum ProductStatus {
+                available
+                unavailable
+                archived
+                draft
+                trashed
             }
         `,
         resolvers: {

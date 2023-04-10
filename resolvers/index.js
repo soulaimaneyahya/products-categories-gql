@@ -61,9 +61,9 @@ export const Query = {
 export const Mutation = {
     createUser: async (parent, args, context, info) => {
         let data = {
-            name: args.name,
-            username: args.username,
-            email: args.email
+            name: args.data.name,
+            username: args.data.username,
+            email: args.data.email
         }
 
         return (await axios.post(`${url}/users`, data)).data
@@ -91,11 +91,11 @@ export const Mutation = {
         // we can get userId from token
         // find all images and delete them
         let data = {
-            name: args.name,
-            description: args.description,
-            price: args.price,
-            quantity: args.quantity,
-            status: args.status,
+            name: args.data.name,
+            description: args.data.description,
+            price: args.data.price,
+            quantity: args.data.quantity,
+            status: args.data.status,
             category: 1,
             user: 1
         }
