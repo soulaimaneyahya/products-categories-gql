@@ -72,9 +72,9 @@ export const Mutation = {
         let user = (await axios.get(`${url}/users/${args.id}`)).data;
 
         let data = {
-            name: args.name != undefined ? args.name : user.name,
-            username: args.username != undefined ? args.username : user.username,
-            email: args.email != undefined ? args.email : user.email
+            name: args.data.name != undefined ? args.data.name : user.name,
+            username: args.data.username != undefined ? args.data.username : user.username,
+            email: args.data.email != undefined ? args.data.email : user.email
         }
 
         return (await axios.put(`${url}/users/${user.id}`, data)).data
@@ -106,11 +106,11 @@ export const Mutation = {
         let product = (await axios.get(`${url}/products/${args.id}`)).data;
 
         let data = {
-            name: args.name != undefined ? args.name : product.name,
-            description: args.description != undefined ? args.description : product.description,
-            price: args.price != undefined ? args.price : product.price,
-            quantity: args.quantity != undefined ? args.quantity : product.quantity,
-            status: args.status != undefined ? args.status : product.status,
+            name: args.data.name != undefined ? args.data.name : product.name,
+            description: args.data.description != undefined ? args.data.description : product.description,
+            price: args.data.price != undefined ? args.data.price : product.price,
+            quantity: args.data.quantity != undefined ? args.data.quantity : product.quantity,
+            status: args.data.status != undefined ? args.data.status : product.status,
             category: product.category,
             product: product.product
         }
